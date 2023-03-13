@@ -1,0 +1,13 @@
+{
+    "name": "pedram/discount",
+    "description": "A package that adds an ability to add multi language to laravel website",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Pedram Davoodi",
+            "email": "pedramdavoodi1376@gmail.com"
+        }
+    ],
+    "require": {
+    }
+}
