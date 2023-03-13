@@ -4,7 +4,6 @@ namespace PedramDavoodi\Localization\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use PedramDavoodi\Localization\Repositories\ConfigLanguageRepository;
-use PedramDavoodi\Localization\Repositories\LanguageRepositoryInterface;
 use PedramDavoodi\Localization\Services\Localize;
 
 class LocalizationServiceProvider extends ServiceProvider
