@@ -3,6 +3,9 @@
 namespace PedramDavoodi\Localization\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use PedramDavoodi\Localization\Repositories\ConfigLanguageRepository;
+use PedramDavoodi\Localization\Repositories\LanguageRepositoryInterface;
+use PedramDavoodi\Localization\Services\Localize;
 
 class LocalizationServiceProvider extends ServiceProvider
 {
@@ -13,7 +16,13 @@ class LocalizationServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('LanguageRepositoryInterface' , function (){
+            return new ConfigLanguageRepository();
+        });
+
+        $this->app->singleton('Localization' , function (){
+            return new Localize(app('LanguageRepositoryInterface'));
+        });
     }
 
     /**
@@ -24,11 +33,11 @@ class LocalizationServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadRoutesFrom(__DIR__.'/../routes.php');
-        $this->loadViewsFrom(__DIR__.'/../Views', 'discount');
         $this->loadMigrationsFrom(__DIR__.'/../Migrations');
 
         $this->publishes([
-            __DIR__.'/../Files' => public_path('vendor/discount'),
+            __DIR__.'/../Languages' => lang_path(),
+            __DIR__.'/../Configs' => config_path(),
         ], 'public');
     }
 }
