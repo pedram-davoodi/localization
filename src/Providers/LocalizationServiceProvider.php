@@ -4,6 +4,7 @@ namespace PedramDavoodi\Localization\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use PedramDavoodi\Localization\Repositories\ConfigLanguageRepository;
+use PedramDavoodi\Localization\Repositories\DBLanguageRepository;
 use PedramDavoodi\Localization\Services\Localize;
 
 class LocalizationServiceProvider extends ServiceProvider
@@ -16,7 +17,10 @@ class LocalizationServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('LanguageRepositoryInterface' , function (){
-            return new ConfigLanguageRepository();
+            switch (config('localization.driver')){
+                case 'db'   : return new DBLanguageRepository();
+                default     : return new ConfigLanguageRepository();
+            }
         });
 
         $this->app->singleton('Localization' , function (){
@@ -37,6 +41,7 @@ class LocalizationServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../Languages' => lang_path(),
             __DIR__.'/../Configs' => config_path(),
+            __DIR__.'/../Seeders' => database_path('/seeders'),
         ], 'public');
     }
 }

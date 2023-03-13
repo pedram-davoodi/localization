@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'default-lang' => 'fa'
+    'default-lang'  => 'fa',
+    'driver'        => 'database'
 ];

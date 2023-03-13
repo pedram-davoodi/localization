@@ -21,7 +21,7 @@ class Localize
 
     /**
      * get message in order to selected or default language
-     * 
+     *
      * @param $key
      * @param null $lang
      * @return string
