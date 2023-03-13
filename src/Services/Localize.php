@@ -9,21 +9,36 @@ use PedramDavoodi\Localization\Repositories\LanguageRepositoryInterface;
 
 class Localize
 {
+    private LocalizationManager $localizationManager;
     private LanguageRepositoryInterface $languageRepository;
 
     /**
      * Localize constructor.
      */
-    public function __construct(LocalizationManager $languageManger)
+    public function __construct(LocalizationManager $localizationManager)
     {
-        $this->languageRepository = $languageManger->getRepository(config('localization.default-driver'));
+        $this->localizationManager = $localizationManager;
+        $this->setLanguageRepositoryInterface(config('localization.default-driver'));
     }
 
     /**
      * get message in order to selected or default language
      */
-    public function get(string $key , string $lang = null): string
+    public function get(string $key , string $lang = null , string $driver = null): string
     {
+        if (!is_null($driver))
+            $this->setLanguageRepositoryInterface($driver);
+
         return $this->languageRepository->get($key , $lang);
+    }
+
+    /**
+     * set localization repository
+     *
+     * @param string $driver
+     */
+    private function setLanguageRepositoryInterface(string $driver) :void
+    {
+        $this->languageRepository = $this->localizationManager->getRepository($driver);
     }
 }
