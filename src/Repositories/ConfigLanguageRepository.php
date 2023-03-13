@@ -12,7 +12,7 @@ class ConfigLanguageRepository implements LanguageRepositoryInterface
      */
     public function getDefaultLang(): string
     {
-        return config('localization.default-lang');
+        return config('localization.drivers.config.default-lang');
     }
 
     /**

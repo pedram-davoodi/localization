@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'default-lang' => 'fa',
-    'default-driver' => 'db',
+    'default-driver' => 'config',
     'drivers' => [
         'db' => [
         ],
         'config' => [
+            'default-lang' => 'en',
         ],
     ],
 ];
