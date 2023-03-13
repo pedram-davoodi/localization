@@ -3,37 +3,37 @@
 namespace PedramDavoodi\Localization\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use PedramDavoodi\Localization\Repositories\ConfigLanguageRepository;
-use PedramDavoodi\Localization\Repositories\DBLanguageRepository;
+use PedramDavoodi\Localization\LocalizationManager;
 use PedramDavoodi\Localization\Services\Localize;
 
 class LocalizationServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
-     *
-     * @return void
      */
-    public function register()
+    public function register():void
     {
-        $this->app->bind('LanguageRepositoryInterface' , function (){
-            switch (config('localization.driver')){
-                case 'db'   : return new DBLanguageRepository();
-                default     : return new ConfigLanguageRepository();
-            }
+        $this->app->singleton('LocalizationManager', function ($app) {
+            return tap(new LocalizationManager(), function ($manager) {
+                foreach (config('localization.drivers') as $repository_type => $values) {
+                    $manager->addRepository($repository_type , function () use ($repository_type){
+                        $repo = "PedramDavoodi\Localization\Repositories\\".$repository_type."LanguageRepository";
+                        return new $repo();
+                    });
+                }
+            });
         });
 
+
         $this->app->singleton('Localization' , function (){
-            return new Localize(app('LanguageRepositoryInterface'));
+            return new Localize(app('LocalizationManager'));
         });
     }
 
     /**
      * Bootstrap services.
-     *
-     * @return void
-     */
-    public function boot()
+     **/
+    public function boot(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../routes.php');
         $this->loadMigrationsFrom(__DIR__.'/../Migrations');
