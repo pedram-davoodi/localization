@@ -35,6 +35,7 @@ class LocalizationServiceProvider extends ServiceProvider
      **/
     public function boot(): void
     {
+        require_once __DIR__.'/../helper.php';
         $this->loadRoutesFrom(__DIR__.'/../routes.php');
         $this->loadMigrationsFrom(__DIR__.'/../Migrations');
 
