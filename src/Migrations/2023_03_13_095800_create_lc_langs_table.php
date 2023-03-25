@@ -15,9 +15,7 @@ class CreateLcLangsTable extends Migration
     {
         Schema::create('lc_langs', function (Blueprint $table) {
             $table->id();
-            $table->string('item');
-            $table->string('lang');
-            $table->string('value');
+            $table->string('lang')->unique();
         });
     }
 

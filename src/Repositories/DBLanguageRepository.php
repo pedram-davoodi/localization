@@ -4,7 +4,7 @@
 namespace PedramDavoodi\Localization\Repositories;
 
 
-use PedramDavoodi\Localization\Models\Lang;
+use PedramDavoodi\Localization\Models\Phrase;
 use PedramDavoodi\Localization\Models\Setting;
 
 class DBLanguageRepository implements LanguageRepositoryInterface
@@ -27,7 +27,7 @@ class DBLanguageRepository implements LanguageRepositoryInterface
     {
         $lang = $lang ?? $this->getDefaultLang();
 
-        $message = Lang::where('lang' , $lang)->firstWhere('item' , $key);
+        $message = Phrase::where('lang' , $lang)->firstWhere('item' , $key);
 
         return $message ? $message->value : $key;
     }
