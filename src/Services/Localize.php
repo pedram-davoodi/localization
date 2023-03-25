@@ -34,8 +34,6 @@ class Localize
 
     /**
      * set localization repository
-     *
-     * @param string $driver
      */
     private function setLanguageRepositoryInterface(string $driver) :void
     {
