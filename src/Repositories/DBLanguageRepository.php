@@ -4,8 +4,10 @@
 namespace PedramDavoodi\Localization\Repositories;
 
 
+use PedramDavoodi\Localization\Models\Lang;
 use PedramDavoodi\Localization\Models\Phrase;
 use PedramDavoodi\Localization\Models\Setting;
+use function React\Promise\all;
 
 class DBLanguageRepository implements LanguageRepositoryInterface
 {
@@ -30,5 +32,17 @@ class DBLanguageRepository implements LanguageRepositoryInterface
         $message = Phrase::where('lang' , $lang)->firstWhere('item' , $key);
 
         return $message ? $message->value : $key;
+    }
+
+    /**
+     * get list of available languages
+     */
+    public function getLangsList(int $paginate = null)
+    {
+        return Lang::when(!is_null($paginate), function ($q) use ($paginate) {
+            return $q->paginate($paginate);
+        } , function ($q){
+            return $q->get();
+        });
     }
 }

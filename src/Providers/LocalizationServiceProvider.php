@@ -24,7 +24,6 @@ class LocalizationServiceProvider extends ServiceProvider
             });
         });
 
-
         $this->app->singleton('Localization' , function (){
             return new Localize(app('LocalizationManager'));
         });
@@ -38,6 +37,7 @@ class LocalizationServiceProvider extends ServiceProvider
         require_once __DIR__.'/../helper.php';
         $this->loadRoutesFrom(__DIR__.'/../routes.php');
         $this->loadMigrationsFrom(__DIR__.'/../Migrations');
+        $this->loadViewsFrom(__DIR__.'/../Views', 'localization');
 
         $this->publishes([
             __DIR__.'/../Languages' => lang_path(),

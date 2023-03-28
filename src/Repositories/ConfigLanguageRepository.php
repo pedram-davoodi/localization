@@ -26,4 +26,12 @@ class ConfigLanguageRepository implements LanguageRepositoryInterface
             return $key;
         }
     }
+
+    /**
+     * get list of available languages
+     */
+    public function getLangsList(int $paginate = null)
+    {
+        // TODO: Implement getLangsList() method.
+    }
 }

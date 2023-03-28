@@ -32,4 +32,12 @@ class CacheLanguageRepository implements LanguageRepositoryInterface
 
         return $db_message;
     }
+
+    /**
+     * get list of available languages
+     */
+    public function getLangsList(int $paginate = null)
+    {
+        // TODO: Implement getLangsList() method.
+    }
 }
