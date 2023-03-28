@@ -1,8 +1,7 @@
 <?php
 
 
-namespace PedramDavoodi\Localization\Repositories;
-
+namespace PedramDavoodi\Localization\Repositories\language;
 
 class ConfigLanguageRepository implements LanguageRepositoryInterface
 {
@@ -25,13 +24,5 @@ class ConfigLanguageRepository implements LanguageRepositoryInterface
         }catch (\Exception $exception){
             return $key;
         }
-    }
-
-    /**
-     * get list of available languages
-     */
-    public function getLangsList(int $paginate = null)
-    {
-        // TODO: Implement getLangsList() method.
     }
 }

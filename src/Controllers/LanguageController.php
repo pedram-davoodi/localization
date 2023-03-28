@@ -4,16 +4,16 @@ namespace PedramDavoodi\Localization\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use PedramDavoodi\Localization\Facades\LocalizationManager;
-use PedramDavoodi\Localization\Repositories\LanguageRepositoryInterface;
+use PedramDavoodi\Localization\Repositories\language\DBLanguageRepository;
+use PedramDavoodi\Localization\Repositories\language\LanguageRepositoryInterface;
 
 class LanguageController extends Controller
 {
     private LanguageRepositoryInterface $language_repository;
 
-    public function __construct(LocalizationManager $localizationManager)
+    public function __construct()
     {
-        $this->language_repository = $localizationManager::getRepository('db');
+        $this->language_repository = new DBLanguageRepository();
     }
 
     /**
@@ -21,7 +21,7 @@ class LanguageController extends Controller
      */
     public function index()
     {
-        return view('localization::language.index')->withLangs($this->language_repository->getLangsList(10));
+        return view('localization::language.index')->withLangs($this->language_repository->index(10));
     }
 
     /**

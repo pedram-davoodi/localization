@@ -1,6 +1,6 @@
 <?php
 
-namespace PedramDavoodi\Localization\Repositories;
+namespace PedramDavoodi\Localization\Repositories\language;
 
 use Illuminate\Support\Facades\Cache;
 
@@ -31,13 +31,5 @@ class CacheLanguageRepository implements LanguageRepositoryInterface
         Cache::put("lc".$lang.".".$key , $db_message , now()->addMinutes(60));
 
         return $db_message;
-    }
-
-    /**
-     * get list of available languages
-     */
-    public function getLangsList(int $paginate = null)
-    {
-        // TODO: Implement getLangsList() method.
     }
 }

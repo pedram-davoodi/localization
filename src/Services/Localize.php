@@ -5,7 +5,7 @@ namespace PedramDavoodi\Localization\Services;
 
 
 use PedramDavoodi\Localization\LocalizationManager;
-use PedramDavoodi\Localization\Repositories\LanguageRepositoryInterface;
+use PedramDavoodi\Localization\Repositories\language\LanguageRepositoryInterface;
 
 class Localize
 {

@@ -5,7 +5,7 @@ namespace PedramDavoodi\Localization;
 
 
 use Closure;
-use PedramDavoodi\Localization\Repositories\LanguageRepositoryInterface;
+use PedramDavoodi\Localization\Repositories\language\LanguageRepositoryInterface;
 
 class LocalizationManager
 {

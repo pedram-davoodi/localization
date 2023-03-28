@@ -17,7 +17,7 @@ class LocalizationServiceProvider extends ServiceProvider
             return tap(new LocalizationManager(), function ($manager) {
                 foreach (config('localization.drivers') as $repository_type => $values) {
                     $manager->addRepository($repository_type , function () use ($repository_type){
-                        $repo = "PedramDavoodi\Localization\Repositories\\".$repository_type."LanguageRepository";
+                        $repo = "PedramDavoodi\Localization\Repositories\language\\".$repository_type."LanguageRepository";
                         return new $repo();
                     });
                 }

@@ -1,15 +1,14 @@
 <?php
 
 
-namespace PedramDavoodi\Localization\Repositories;
+namespace PedramDavoodi\Localization\Repositories\language;
 
 
 use PedramDavoodi\Localization\Models\Lang;
 use PedramDavoodi\Localization\Models\Phrase;
 use PedramDavoodi\Localization\Models\Setting;
-use function React\Promise\all;
 
-class DBLanguageRepository implements LanguageRepositoryInterface
+class DBLanguageRepository implements LanguageRepositoryInterface,EditableLanguageRepositoryInterface
 {
 
     /**
@@ -37,12 +36,20 @@ class DBLanguageRepository implements LanguageRepositoryInterface
     /**
      * get list of available languages
      */
-    public function getLangsList(int $paginate = null)
+    public function index(int $paginate = null)
     {
         return Lang::when(!is_null($paginate), function ($q) use ($paginate) {
             return $q->paginate($paginate);
         } , function ($q){
             return $q->get();
         });
+    }
+
+    /**
+     * edit a language
+     */
+    public function edit(int $lang_id)
+    {
+        // TODO: Implement edit() method.
     }
 }
