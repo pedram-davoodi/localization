@@ -3,21 +3,21 @@
 namespace PedramDavoodi\Localization\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use PedramDavoodi\Localization\Repositories\language\DBLanguageRepository;
-use PedramDavoodi\Localization\Repositories\language\LanguageRepositoryInterface;
+use PedramDavoodi\Localization\Repositories\language\EditableLanguageRepositoryInterface;
+use PedramDavoodi\Localization\Requests\LanguageStoreRequest;
+use PedramDavoodi\Localization\Requests\LanguageUpdateRequest;
 
 class LanguageController extends Controller
 {
-    private LanguageRepositoryInterface $language_repository;
+    private EditableLanguageRepositoryInterface $language_repository;
 
-    public function __construct()
+    public function __construct(EditableLanguageRepositoryInterface $editableLanguageRepository)
     {
-        $this->language_repository = new DBLanguageRepository();
+        $this->language_repository = $editableLanguageRepository;
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the language.
      */
     public function index()
     {
@@ -25,50 +25,56 @@ class LanguageController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new language.
      */
     public function create()
     {
-        //
+        return view('localization::language.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created language in storage.
      */
-    public function store(Request $request)
+    public function store(LanguageStoreRequest $request)
     {
-        //
+        $this->language_repository->create($request);
+
+        return redirect()->route('language.index')->withSuccess(___('successCreation'));
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified language.
      */
-    public function show($id)
+    public function show(int $lang_id)
     {
-        //
+        return view('localization::language.show')->withLang($this->language_repository->show($lang_id));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified language.
      */
-    public function edit($id)
+    public function edit(int $lang_id)
     {
-        //
+        return view('localization::language.edit')->withLang($this->language_repository->show($lang_id));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified language in storage.
      */
-    public function update(Request $request, $id)
+    public function update(LanguageUpdateRequest $request, int $lang_id)
     {
-        //
+        $this->language_repository->update($request , $lang_id);
+
+        return redirect()->route('language.edit' , $lang_id);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified language from storage.
      */
-    public function destroy($id)
+    public function destroy(int $lang_id)
     {
-        //
+        $this->language_repository->delete($lang_id);
+
+        return redirect()->route('language.index')->withSuccess(___('success'));
     }
 }

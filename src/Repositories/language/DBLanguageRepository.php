@@ -3,10 +3,11 @@
 
 namespace PedramDavoodi\Localization\Repositories\language;
 
-
 use PedramDavoodi\Localization\Models\Lang;
 use PedramDavoodi\Localization\Models\Phrase;
 use PedramDavoodi\Localization\Models\Setting;
+use PedramDavoodi\Localization\Requests\LanguageStoreRequest;
+use PedramDavoodi\Localization\Requests\LanguageUpdateRequest;
 
 class DBLanguageRepository implements LanguageRepositoryInterface,EditableLanguageRepositoryInterface
 {
@@ -48,8 +49,33 @@ class DBLanguageRepository implements LanguageRepositoryInterface,EditableLangua
     /**
      * edit a language
      */
-    public function edit(int $lang_id)
+    public function update(LanguageUpdateRequest $request, $lang_id)
     {
         // TODO: Implement edit() method.
+    }
+
+    /**
+     * create a new language
+     */
+    public function store(LanguageStoreRequest $request)
+    {
+        // TODO: Implement create() method.
+    }
+
+    /**
+     * delete an existing language
+     */
+    public function delete($lang_id)
+    {
+        // TODO: Implement delete() method.
+    }
+
+
+    /**
+     * show an existing language
+     */
+    public function show(int $lang_id)
+    {
+        // TODO: Implement show() method.
     }
 }

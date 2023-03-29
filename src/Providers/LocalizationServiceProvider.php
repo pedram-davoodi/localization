@@ -4,6 +4,8 @@ namespace PedramDavoodi\Localization\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use PedramDavoodi\Localization\LocalizationManager;
+use PedramDavoodi\Localization\Repositories\language\DBLanguageRepository;
+use PedramDavoodi\Localization\Repositories\language\EditableLanguageRepositoryInterface;
 use PedramDavoodi\Localization\Services\Localize;
 
 class LocalizationServiceProvider extends ServiceProvider
@@ -27,6 +29,8 @@ class LocalizationServiceProvider extends ServiceProvider
         $this->app->singleton('Localization' , function (){
             return new Localize(app('LocalizationManager'));
         });
+
+        $this->app->singleton(EditableLanguageRepositoryInterface::class, DBLanguageRepository::class);
     }
 
     /**
