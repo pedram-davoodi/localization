@@ -17,6 +17,6 @@ class Lang extends Model
      */
     public function phrases(): HasMany
     {
-        return $this->hasMany(Phrase::class , 'lang');
+        return $this->hasMany(Phrase::class , 'lang' , 'lang');
     }
 }

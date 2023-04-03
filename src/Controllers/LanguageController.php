@@ -37,9 +37,9 @@ class LanguageController extends Controller
      */
     public function store(LanguageStoreRequest $request)
     {
-        $this->language_repository->create($request);
+        $this->language_repository->store($request);
 
-        return redirect()->route('language.index')->withSuccess(___('successCreation'));
+        return redirect()->route('language.index')->withSuccess(___('successStore'));
     }
 
     /**
@@ -65,7 +65,7 @@ class LanguageController extends Controller
     {
         $this->language_repository->update($request , $lang_id);
 
-        return redirect()->route('language.edit' , $lang_id);
+        return redirect()->route('language.edit' , $lang_id)->withSuccess(___('successUpdate'));
     }
 
     /**
@@ -75,6 +75,6 @@ class LanguageController extends Controller
     {
         $this->language_repository->delete($lang_id);
 
-        return redirect()->route('language.index')->withSuccess(___('success'));
+        return redirect()->route('language.index')->withSuccess(___('successDelete'));
     }
 }

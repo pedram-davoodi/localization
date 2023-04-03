@@ -49,33 +49,42 @@ class DBLanguageRepository implements LanguageRepositoryInterface,EditableLangua
     /**
      * edit a language
      */
-    public function update(LanguageUpdateRequest $request, $lang_id)
+    public function update(LanguageUpdateRequest $request, $lang_id): bool
     {
-        // TODO: Implement edit() method.
+        try {
+            return Lang::whereId($lang_id)->with('phrases')->update($request->validated());
+        }catch (\Exception $exception){
+            return false;
+        }
     }
 
     /**
      * create a new language
      */
-    public function store(LanguageStoreRequest $request)
+    public function store(LanguageStoreRequest $request):bool
     {
-        // TODO: Implement create() method.
+        try {
+            Lang::create($request->validated());
+            return true;
+        }catch (\Exception $exception){
+            return false;
+        }
     }
 
     /**
      * delete an existing language
      */
-    public function delete($lang_id)
+    public function delete($lang_id):bool
     {
-        // TODO: Implement delete() method.
+        return Lang::firstWhere('id' , $lang_id)->delete();
     }
 
 
     /**
      * show an existing language
      */
-    public function show(int $lang_id)
+    public function show(int $lang_id): ?Lang
     {
-        // TODO: Implement show() method.
+        return Lang::findOrFail($lang_id);
     }
 }
