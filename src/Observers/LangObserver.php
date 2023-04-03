@@ -45,7 +45,7 @@ class LangObserver
      */
     public function restored(Lang $lang)
     {
-        //
+        //TODO
     }
 
     /**
@@ -53,6 +53,6 @@ class LangObserver
      */
     public function forceDeleted(Lang $lang)
     {
-        //
+        //TODO
     }
 }
