@@ -3,6 +3,7 @@
 namespace PedramDavoodi\Localization\Repositories\language;
 
 use Illuminate\Support\Facades\Cache;
+use PedramDavoodi\Localization\Models\Phrase;
 
 class CacheLanguageRepository implements LanguageRepositoryInterface
 {
@@ -31,5 +32,10 @@ class CacheLanguageRepository implements LanguageRepositoryInterface
         Cache::put("lc".$lang.".".$key , $db_message , now()->addMinutes(60));
 
         return $db_message;
+    }
+
+    public function resetLangCache($lang)
+    {
+        //TODO
     }
 }

@@ -15,6 +15,8 @@ class LocalizationServiceProvider extends ServiceProvider
      */
     public function register():void
     {
+        $this->app->register(EventServiceProvider::class);
+
         $this->app->singleton('LocalizationManager', function ($app) {
             return tap(new LocalizationManager(), function ($manager) {
                 foreach (config('localization.drivers') as $repository_type => $values) {
