@@ -52,7 +52,7 @@ class DBLanguageRepository implements LanguageRepositoryInterface,EditableLangua
     public function update(LanguageUpdateRequest $request, $lang_id): bool
     {
         try {
-            return Lang::whereId($lang_id)->with('phrases')->update($request->validated());
+            return Lang::findOrFail($lang_id)->first()->update($request->validated());
         }catch (\Exception $exception){
             return false;
         }
@@ -76,7 +76,7 @@ class DBLanguageRepository implements LanguageRepositoryInterface,EditableLangua
      */
     public function delete($lang_id):bool
     {
-        return Lang::firstWhere('id' , $lang_id)->delete();
+        return Lang::findOrFail($lang_id)->delete();
     }
 
 

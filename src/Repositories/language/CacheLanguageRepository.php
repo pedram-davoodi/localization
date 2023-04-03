@@ -25,17 +25,33 @@ class CacheLanguageRepository implements LanguageRepositoryInterface
      * get message
      */
     public function get(string $key , string $lang = null): string {
-        if (!is_null($cache_message = Cache::get("lc".$lang.".".$key)))
+
+        $lang = $lang?:$this->getDefaultLang();
+
+        if (!is_null($cache_message = Cache::tags(['lc' , $lang])->get($key)))
             return $cache_message;
 
         $db_message = (new DBLanguageRepository)->get($key , $lang);
-        Cache::put("lc".$lang.".".$key , $db_message , now()->addMinutes(60));
+        Cache::tags(['lc' , $lang])->put($key , $db_message , now()->addMinutes(60));
 
         return $db_message;
     }
 
-    public function resetLangCache($lang)
+    /**
+     * clear phrases for a specific lang
+     */
+    public function clearLangCache($lang)
     {
-        //TODO
+        Cache::tags(['lc' , $lang])->clear();
+    }
+
+    /**
+     * set phrases for a specific lang
+     */
+    public function setLangCache($lang)
+    {
+        Phrase::whereLang($lang)->get()->each(function ($phrase) use ($lang){
+            Cache::tags(['lc' , $lang])->put($phrase->item , $phrase->value , now()->addMinutes(60));
+        });
     }
 }
