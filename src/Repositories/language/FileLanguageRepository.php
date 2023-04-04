@@ -3,7 +3,7 @@
 
 namespace PedramDavoodi\Localization\Repositories\language;
 
-class ConfigLanguageRepository implements LanguageRepositoryInterface
+class FileLanguageRepository implements LanguageRepositoryInterface
 {
 
     /**
@@ -11,7 +11,7 @@ class ConfigLanguageRepository implements LanguageRepositoryInterface
      */
     public function getDefaultLang(): string
     {
-        return config('localization.drivers.config.default-lang');
+        return config('localization.drivers.file.default-lang');
     }
 
     /**

@@ -5,7 +5,7 @@ return [
     'drivers' => [
         'db' => [
         ],
-        'config' => [
+        'file' => [
             'default-lang' => 'en',
         ],
         'cache' => [
