@@ -9,14 +9,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>Create Lang</h1>
-    @include('localization::includes.messages')
-    <form method="post" action="{{route('language.store')}}">
-        @csrf
-        <input name="name" type="text" placeholder="name">
-        <input name="lang" type="text" placeholder="lang">
-        <input type="submit" value="submit">
-    </form>
+
 </div>
 </body>
 </html>

@@ -4,16 +4,20 @@ namespace PedramDavoodi\Localization\Controllers;
 
 use App\Http\Controllers\Controller;
 use PedramDavoodi\Localization\Repositories\language\EditableLanguageRepositoryInterface;
+use PedramDavoodi\Localization\Repositories\phrase\PhraseRepository;
+use PedramDavoodi\Localization\Repositories\phrase\PhraseRepositoryInterface;
 use PedramDavoodi\Localization\Requests\LanguageStoreRequest;
 use PedramDavoodi\Localization\Requests\LanguageUpdateRequest;
 
 class LanguageController extends Controller
 {
     private EditableLanguageRepositoryInterface $language_repository;
+    private PhraseRepositoryInterface $phrase_repository;
 
     public function __construct(EditableLanguageRepositoryInterface $editableLanguageRepository)
     {
         $this->language_repository = $editableLanguageRepository;
+        $this->phrase_repository = new PhraseRepository();
     }
 
     /**
@@ -55,7 +59,9 @@ class LanguageController extends Controller
      */
     public function edit(int $lang_id)
     {
-        return view('localization::language.edit')->withLang($this->language_repository->show($lang_id));
+        return view('localization::language.edit')
+            ->withLang($this->language_repository->show($lang_id))
+            ->withPhrases($this->phrase_repository->index($lang_id));
     }
 
     /**
