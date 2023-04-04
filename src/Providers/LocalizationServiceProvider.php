@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use PedramDavoodi\Localization\LocalizationManager;
 use PedramDavoodi\Localization\Repositories\language\DBLanguageRepository;
 use PedramDavoodi\Localization\Repositories\language\EditableLanguageRepositoryInterface;
+use PedramDavoodi\Localization\Repositories\phrase\DBPhraseRepository;
+use PedramDavoodi\Localization\Repositories\phrase\PhraseRepositoryInterface;
 use PedramDavoodi\Localization\Services\Localize;
 
 class LocalizationServiceProvider extends ServiceProvider
@@ -33,6 +35,7 @@ class LocalizationServiceProvider extends ServiceProvider
         });
 
         $this->app->singleton(EditableLanguageRepositoryInterface::class, DBLanguageRepository::class);
+        $this->app->singleton(PhraseRepositoryInterface::class, DBPhraseRepository::class);
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace PedramDavoodi\Localization\Controllers;
 
 use App\Http\Controllers\Controller;
-use PedramDavoodi\Localization\Repositories\phrase\PhraseRepository;
 use PedramDavoodi\Localization\Repositories\phrase\PhraseRepositoryInterface;
 use PedramDavoodi\Localization\Requests\PhraseStoreRequest;
 use PedramDavoodi\Localization\Requests\PhraseUpdateRequest;
@@ -12,9 +11,9 @@ class PhraseController extends Controller
 {
     private PhraseRepositoryInterface $phrase_repository;
 
-    public function __construct()
+    public function __construct(PhraseRepositoryInterface $phrase_repository)
     {
-        $this->phrase_repository = new PhraseRepository();
+        $this->phrase_repository = $phrase_repository;
     }
 
     /**

@@ -8,7 +8,7 @@ use PedramDavoodi\Localization\Models\Phrase;
 use PedramDavoodi\Localization\Requests\PhraseStoreRequest;
 use PedramDavoodi\Localization\Requests\PhraseUpdateRequest;
 
-class PhraseRepository implements PhraseRepositoryInterface
+class DBPhraseRepository implements PhraseRepositoryInterface
 {
 
     /**
