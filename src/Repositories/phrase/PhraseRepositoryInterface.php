@@ -26,9 +26,4 @@ interface PhraseRepositoryInterface
      * update an existing phrase
      */
     public function update(PhraseUpdateRequest $request, int $phrase_id);
-
-    /**
-     * show existing phrase
-     */
-    public function show(int $phrase_id);
 }

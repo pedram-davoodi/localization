@@ -49,12 +49,4 @@ class DBPhraseRepository implements PhraseRepositoryInterface
     {
         return Phrase::findOrFail($phrase_id)->update($request->validated());
     }
-
-    /**
-     * show existing phrase
-     */
-    public function show(int $phrase_id)
-    {
-        return Phrase::findOrFail($phrase_id);
-    }
 }
