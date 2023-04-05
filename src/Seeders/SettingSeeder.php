@@ -15,7 +15,8 @@ class SettingSeeder extends Seeder
         Setting::insert([
             [
                 'key' => 'default-lang',
-                'values' => 'fa'
+                'values' => 'fa',
+                'validation' => 'required|string|exists:lc_langs,lang'
             ],
         ]);
     }
