@@ -10,6 +10,9 @@ class Setting extends Model
     protected $table = 'lc_settings';
     public $timestamps = [];
 
+    /**
+     * Setting keys in database
+     */
     public const SETTING_KEYS = [
         'default-lang' => 'default-lang',
         'lang-cache' => 'lang-cache-time',
