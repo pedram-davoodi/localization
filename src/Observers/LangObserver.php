@@ -38,6 +38,9 @@ class LangObserver
     public function deleted(Lang $lang)
     {
         $this->cache_language_repository->clearLangCache($lang->lang);
+        $lang->update([
+            'lang' => time() . '::' . $lang->lang
+        ]);
     }
 
     /**

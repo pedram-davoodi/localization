@@ -24,7 +24,7 @@ class PhraseStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'item'  => 'required|string|unique:lc_phrases,value',
+            'item'  => 'required|string|unique:lc_phrases,item',
             'lang'  => 'required|string|exists:lc_langs,lang',
             'value' => 'required|string',
         ];

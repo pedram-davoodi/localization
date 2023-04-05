@@ -27,7 +27,9 @@ class PhraseObserver
      */
     public function deleted(Phrase $phrase)
     {
-        //
+        $phrase->update([
+            'item' => time() . '::' . $phrase->item
+        ]);
     }
 
     /**
