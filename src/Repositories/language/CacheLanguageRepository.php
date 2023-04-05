@@ -6,13 +6,16 @@ use Illuminate\Support\Facades\Cache;
 use PedramDavoodi\Localization\Models\Phrase;
 use PedramDavoodi\Localization\Models\Setting;
 
-class CacheLanguageRepository implements LanguageRepositoryInterface
+class CacheLanguageRepository extends AbstractLanguageRepository
 {
     /**
      * get default language
      */
     public function getDefaultLang(): string
     {
+        if (($lang = parent::getDefaultLang()) !== null)
+            return $lang;
+
         if (!is_null($default_lang = Cache::get("lc-default-lang")))
             return $default_lang;
 

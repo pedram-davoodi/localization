@@ -5,12 +5,13 @@ namespace PedramDavoodi\Localization\Services;
 
 
 use PedramDavoodi\Localization\LocalizationManager;
-use PedramDavoodi\Localization\Repositories\language\LanguageRepositoryInterface;
+use PedramDavoodi\Localization\Models\Lang;
+use PedramDavoodi\Localization\Repositories\language\AbstractLanguageRepository;
 
 class Localize
 {
     private LocalizationManager $localizationManager;
-    private LanguageRepositoryInterface $languageRepository;
+    private AbstractLanguageRepository  $languageRepository;
 
     /**
      * Localize constructor.
@@ -30,6 +31,18 @@ class Localize
             $this->setLanguageRepositoryInterface($driver);
 
         return $this->languageRepository->get($key , $lang);
+    }
+
+    /**
+     * change default lang for a user by session
+     */
+    public function changeDefaultLanguageByCookie($lang):bool
+    {
+        if (Lang::whereLang($lang)->exists()) {
+            setcookie('lc-default-lang' , $lang);
+            return true;
+        }
+        return false;
     }
 
     /**

@@ -3,7 +3,7 @@
 
 namespace PedramDavoodi\Localization\Repositories\language;
 
-class FileLanguageRepository implements LanguageRepositoryInterface
+class FileLanguageRepository extends AbstractLanguageRepository
 {
 
     /**
@@ -11,6 +11,9 @@ class FileLanguageRepository implements LanguageRepositoryInterface
      */
     public function getDefaultLang(): string
     {
+        if (($lang = parent::getDefaultLang()) !== null)
+            return $lang;
+
         return config('localization.drivers.file.default-lang');
     }
 

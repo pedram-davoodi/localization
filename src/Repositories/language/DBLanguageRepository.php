@@ -9,7 +9,7 @@ use PedramDavoodi\Localization\Models\Setting;
 use PedramDavoodi\Localization\Requests\LanguageStoreRequest;
 use PedramDavoodi\Localization\Requests\LanguageUpdateRequest;
 
-class DBLanguageRepository implements LanguageRepositoryInterface,EditableLanguageRepositoryInterface
+class DBLanguageRepository extends AbstractLanguageRepository implements EditableLanguageRepositoryInterface
 {
 
     /**
@@ -17,9 +17,12 @@ class DBLanguageRepository implements LanguageRepositoryInterface,EditableLangua
      */
     public function getDefaultLang(): string
     {
+        if (($lang = parent::getDefaultLang()) !== null)
+            return $lang;
+
         $default_lang = Setting::getSetting(Setting::SETTING_KEYS['default-lang']);
 
-        return $default_lang ? $default_lang : "en";
+        return $default_lang ?: "en";
     }
 
     /**

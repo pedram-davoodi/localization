@@ -5,7 +5,7 @@ namespace PedramDavoodi\Localization;
 
 
 use Closure;
-use PedramDavoodi\Localization\Repositories\language\LanguageRepositoryInterface;
+use PedramDavoodi\Localization\Repositories\language\AbstractLanguageRepository;
 
 class LocalizationManager
 {
@@ -22,7 +22,7 @@ class LocalizationManager
     /**
      * get requested repository
      */
-    public function getRepository(string $repo): LanguageRepositoryInterface
+    public function getRepository(string $repo): AbstractLanguageRepository
     {
         return $this->repositories[$repo]();
     }
