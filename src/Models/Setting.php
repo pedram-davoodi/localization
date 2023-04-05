@@ -10,11 +10,17 @@ class Setting extends Model
     protected $table = 'lc_settings';
     public $timestamps = [];
 
+    public const SETTING_KEYS = [
+        'default-lang' => 'default-lang',
+        'lang-cache' => 'lang-cache-time',
+        'phrase-cache' => 'phrase-cache-time',
+    ];
+
     /**
      * get default lang store in db
      */
-    public static function getDefaultLang(): Setting
+    public static function getSetting($key): string
     {
-        return self::firstWhere('key' , 'default-lang');
+        return self::firstWhere('key' , $key)->values;
     }
 }

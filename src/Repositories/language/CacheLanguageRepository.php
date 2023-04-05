@@ -4,6 +4,7 @@ namespace PedramDavoodi\Localization\Repositories\language;
 
 use Illuminate\Support\Facades\Cache;
 use PedramDavoodi\Localization\Models\Phrase;
+use PedramDavoodi\Localization\Models\Setting;
 
 class CacheLanguageRepository implements LanguageRepositoryInterface
 {
@@ -16,7 +17,7 @@ class CacheLanguageRepository implements LanguageRepositoryInterface
             return $default_lang;
 
         $default_lang = (new DBLanguageRepository)->getDefaultLang();
-        Cache::put("lc-default-lang" , $default_lang , now()->addDays(10));
+        Cache::put("lc-default-lang" , $default_lang , now()->addMinutes(Setting::getSetting(Setting::SETTING_KEYS['lang-cache'])));
 
         return $default_lang;
     }
@@ -32,7 +33,7 @@ class CacheLanguageRepository implements LanguageRepositoryInterface
             return $cache_message;
 
         $db_message = (new DBLanguageRepository)->get($key , $lang);
-        Cache::tags(['lc' , $lang])->put($key , $db_message , now()->addMinutes(60));
+        Cache::tags(['lc' , $lang])->put($key , $db_message , now()->addMinutes(Setting::getSetting(Setting::SETTING_KEYS['phrase-cache'])));
 
         return $db_message;
     }
@@ -51,7 +52,7 @@ class CacheLanguageRepository implements LanguageRepositoryInterface
     public function setLangCache($lang)
     {
         Phrase::whereLang($lang)->get()->each(function ($phrase) use ($lang){
-            Cache::tags(['lc' , $lang])->put($phrase->item , $phrase->value , now()->addMinutes(60));
+            Cache::tags(['lc' , $lang])->put($phrase->item , $phrase->value , now()->addMinutes(Setting::getSetting(Setting::SETTING_KEYS['phrase-cache'])));
         });
     }
 }

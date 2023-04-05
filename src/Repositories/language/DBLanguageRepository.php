@@ -17,9 +17,9 @@ class DBLanguageRepository implements LanguageRepositoryInterface,EditableLangua
      */
     public function getDefaultLang(): string
     {
-        $default_lang = Setting::getDefaultLang();
+        $default_lang = Setting::getSetting(Setting::SETTING_KEYS['default-lang']);
 
-        return $default_lang ? $default_lang->values : "en";
+        return $default_lang ? $default_lang : "en";
     }
 
     /**
