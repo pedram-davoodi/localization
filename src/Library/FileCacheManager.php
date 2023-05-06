@@ -48,14 +48,32 @@ class FileCacheManager
         return $cache[$key]['value'];
     }
 
-    public function isCached()
+    /**
+     * Check if a key is cached or not
+     *
+     * @param $key
+     * @return bool
+     */
+    public function isCached($key)
     {
-        //TODO
+        $cache = $this->getALL();
+        return (isset($cache[$key]) and $cache[$key]['expire_at'] - now()->timestamp > 0);
     }
 
-    public function forget()
+    /**
+     * Remove a key from cache
+     *
+     * @param $key
+     * @return bool
+     */
+    public function forget($key)
     {
-        //TODO
+        $cache = $this->getALL();
+        if(isset($cache[$key]) and $cache[$key]['expire_at'] - now()->timestamp > 0){
+            unset($cache[$key]);
+        }
+
+        return file_put_contents($this->file_address , json_encode($cache)) !== false;
     }
 
     /**
